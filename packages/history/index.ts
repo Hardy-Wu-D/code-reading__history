@@ -1016,6 +1016,16 @@ type Events<F> = {
   call: (arg: any) => void;
 };
 
+/**
+ * 创建事件队列的工厂方法，
+ * 返回事件队列实例{ length, push, call }
+ * length: 只读，所注册的事件回调队列长度
+ * push: 注册事件监听回调，返回取消监听的方法
+ * call: 调用所有的事件监听回调
+ *
+ * @template F
+ * @return {*}  {Events<F>}
+ */
 function createEvents<F extends Function>(): Events<F> {
   let handlers: F[] = [];
 
@@ -1035,6 +1045,11 @@ function createEvents<F extends Function>(): Events<F> {
   };
 }
 
+/**
+ * 创建一个随机key
+ *
+ * @return {*} 
+ */
 function createKey() {
   return Math.random().toString(36).substr(2, 8);
 }
@@ -1054,6 +1069,7 @@ export function createPath({
 
 /**
  * Parses a string URL path into its separate pathname, search, and hash components.
+ * 将URL path字符串解析成对应的pathname，search，components
  *
  * @see https://github.com/ReactTraining/history/tree/master/docs/api-reference.md#parsepath
  */
